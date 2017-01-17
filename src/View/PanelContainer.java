@@ -97,6 +97,7 @@ public class PanelContainer extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Aplikasi Pencatatan Keuangan DX Mobile");
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N

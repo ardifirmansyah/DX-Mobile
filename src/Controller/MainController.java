@@ -27,7 +27,6 @@ public class MainController extends MouseAdapter implements ActionListener {
     
     private String currentView;
     private JPanel mainPanel;
-    private JPanel menuPanel;
     
     /* defenisi view */
     private Login login;
@@ -77,22 +76,22 @@ public class MainController extends MouseAdapter implements ActionListener {
         if (source.equals(login.getBtnLogin())) {
             /* login handler */
             
-            if (login.getUsername().equals("admin")) {
-                if (login.getPassword().equals("dxmobile")) {
-                    login.dispose();
+//            if (login.getUsername().equals("admin")) {
+//                if (login.getPassword().equals("dxmobile")) {
+//                    login.dispose();
                     currentView = "0";
                     view.setVisible(true);
                     view.setLocationRelativeTo(null);
                     view.getCardLayout()
                             .show(mainPanel, currentView);
-                }
-                else {
-                    JOptionPane.showMessageDialog(login, "Login gagal");
-                }
-            }
-            else {
-                JOptionPane.showMessageDialog(login, "Login gagal");
-            }
+//                }
+//                else {
+//                    JOptionPane.showMessageDialog(login, "Login gagal");
+//                }
+//            }
+//            else {
+//                JOptionPane.showMessageDialog(login, "Login gagal");
+//            }
         }
         
         if (source.equals(view.getBtnHome())) {

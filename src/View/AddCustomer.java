@@ -52,6 +52,8 @@ public class AddCustomer extends javax.swing.JPanel {
         btnSubmit = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
+        setBorder(javax.swing.BorderFactory.createTitledBorder("Add Customer"));
+
         btnSubmit.setText("Submit");
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
@@ -61,15 +63,15 @@ public class AddCustomer extends javax.swing.JPanel {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(71, 71, 71)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(72, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(29, 29, 29)
                         .addComponent(nameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnSubmit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addGap(80, 80, 80))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,7 +82,7 @@ public class AddCustomer extends javax.swing.JPanel {
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

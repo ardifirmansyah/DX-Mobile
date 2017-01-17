@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class Application {
     private ArrayList<Transaction> listTransaction;
+    private ArrayList<Customer> listCustomer;
     private Database db;
     
     public Application() {
