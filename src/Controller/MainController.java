@@ -6,10 +6,14 @@
 package Controller;
 
 import Model.Application;
+import Model.Customer;
 import View.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -107,7 +111,13 @@ public class MainController extends MouseAdapter implements ActionListener {
             currentView = "4";
         }
         else if (source.equals(view.getBtnLogout())) {
-            System.exit(0);
+            int confirm = JOptionPane.showConfirmDialog(view, "Apakah anda yakin untuk logout?");
+            if (confirm == JOptionPane.YES_OPTION) {
+                System.exit(0);
+            }
+            else {
+                currentView = "0";
+            }
         }
         
         switch (currentView) {
@@ -115,7 +125,32 @@ public class MainController extends MouseAdapter implements ActionListener {
                 view.getCardLayout().show(mainPanel, currentView);
             }
             case "1": {
+                addCustomer.reset();
                 view.getCardLayout().show(mainPanel, currentView);
+                Customer c = null;
+                if (source.equals(addCustomer.getBtnSubmit())) {
+                    try {
+                        String namaCustomer = addCustomer.getCustomerName();
+                        c = model.getCustomerByName(namaCustomer);
+                        
+                        if (c == null) {
+                            c = new Customer(namaCustomer);
+                            model.addCustomer(c);
+                            c = model.getCustomerByName(namaCustomer);
+                            if (c != null) {
+                                JOptionPane.showMessageDialog(view, "Customer baru berhasil ditambah. ID : " + c.getIdPelanggan());
+                            }
+                            else {
+                                JOptionPane.showMessageDialog(view, "Customer gagal ditambahkan.");
+                            }
+                        }
+                        else {
+                            JOptionPane.showMessageDialog(view, "Nama customer sudah ada. Masukkan nama lain");
+                        }
+                    } catch (SQLException ex) {
+                        JOptionPane.showMessageDialog(view, "Error : " + ex.getMessage());
+                    }
+                }
             }
             case "2": {
                 view.getCardLayout().show(mainPanel, currentView);
