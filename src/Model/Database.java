@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -53,8 +54,24 @@ public class Database {
                 + name + "'";
         ResultSet rs = statement.executeQuery(query);
         if (rs.next()) {
-            c = new Customer(rs.getInt(1), rs.getString(2), rs.getInt(3));
+            c = new Customer(rs.getInt(1), 
+                    rs.getString(2), 
+                    rs.getInt(3));
         }
         return c;
+    }
+
+    public ArrayList<Customer> loadCustomer() throws SQLException {
+        ArrayList<Customer> listCustomer = new ArrayList<>();
+        Customer c = null;
+        String query = "select * from pelanggan";
+        ResultSet rs = statement.executeQuery(query);
+        while (rs.next()) {
+            c = new Customer(rs.getInt(1), 
+                    rs.getString(2), 
+                    rs.getInt(3));
+            listCustomer.add(c);
+        }
+        return listCustomer;
     }
 }

@@ -20,6 +20,7 @@ public class Application {
     private Database db;
     
     public Application() {
+        listCustomer = new ArrayList<>();
         try {
             db = new Database();
             if (db.connect() != null) {
@@ -30,6 +31,10 @@ public class Application {
             JOptionPane.showMessageDialog(new JFrame(), "Akan keluar program");
             System.exit(0);
         }
+    }
+    
+    public ArrayList loadCustomer() throws SQLException {
+        return db.loadCustomer();
     }
     
     public void addCustomer(Customer c) throws SQLException {

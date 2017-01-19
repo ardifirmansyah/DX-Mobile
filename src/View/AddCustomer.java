@@ -20,6 +20,10 @@ public class AddCustomer extends javax.swing.JPanel {
         initComponents();
     }
     
+    public void setCustomerName(String name) {
+        nameInput.setText(name);
+    }
+    
     public String getCustomerName() {
         return nameInput.getText();
     }

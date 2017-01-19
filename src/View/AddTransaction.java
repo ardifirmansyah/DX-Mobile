@@ -5,6 +5,11 @@
  */
 package View;
 
+import Model.Customer;
+import java.util.ArrayList;
+import javax.swing.ComboBoxModel;
+import javax.swing.JComboBox;
+
 /**
  *
  * @author ardifirmansyah
@@ -16,6 +21,44 @@ public class AddTransaction extends javax.swing.JPanel {
      */
     public AddTransaction() {
         initComponents();
+    }
+    
+    public String getKode() {
+        return kodeInput.getText();
+    }
+    
+    public String getDeskripsi() {
+        return deskripsiInput.getText();
+    }
+    
+    public String getNomorHP() {
+        return nomorHpInput.getText();
+    }
+    
+    public int getHargaBeli() throws NumberFormatException {
+        return Integer.parseInt(hargaBeliInput.getText());
+    }
+    
+    public int getHargaJual() throws NumberFormatException {
+        return Integer.parseInt(hargaJualInput.getText());
+    }
+    
+    public Customer getSelectedCustomer() {
+        return (Customer) cbCustomer.getSelectedItem();
+    }
+    
+    public JComboBox getCbCustomer() {
+        return cbCustomer;
+    }
+    
+    public void setCustomerItem(ArrayList<Customer> listCustomer) {
+        for (Customer c : listCustomer) {
+            cbCustomer.addItem(c);
+        }
+    }
+    
+    public Object getBtnSubmit() {
+        return btnSubmit;
     }
 
     /**

@@ -124,35 +124,45 @@ public class MainController extends MouseAdapter implements ActionListener {
                 view.getCardLayout().show(mainPanel, currentView);
             }
             case "1": {
-                addCustomer.reset();
                 view.getCardLayout().show(mainPanel, currentView);
                 Customer c = null;
                 if (source.equals(addCustomer.getBtnSubmit())) {
-                    try {
-                        String namaCustomer = addCustomer.getCustomerName();
-                        c = model.getCustomerByName(namaCustomer);
-                        
-                        if (c == null) {
-                            c = new Customer(namaCustomer);
-                            model.addCustomer(c);
+                    String namaCustomer = addCustomer.getCustomerName();
+                    addCustomer.setCustomerName(namaCustomer);
+                    if (namaCustomer.isEmpty()) {
+                        JOptionPane.showMessageDialog(view, "Nama pelanggan tidak boleh kosong");
+                    }
+                    else {
+                        try {
                             c = model.getCustomerByName(namaCustomer);
-                            if (c != null) {
-                                JOptionPane.showMessageDialog(view, "Customer baru berhasil ditambah. ID : " + c.getIdPelanggan());
+                            if (c == null) {
+                                c = new Customer(namaCustomer);
+                                model.addCustomer(c);
+                                c = model.getCustomerByName(namaCustomer);
+                                if (c != null) {
+                                    JOptionPane.showMessageDialog(view, "Customer baru berhasil ditambah. ID : " + c.getIdPelanggan());
+                                }
+                                else {
+                                    JOptionPane.showMessageDialog(view, "Customer gagal ditambahkan.");
+                                }
                             }
                             else {
-                                JOptionPane.showMessageDialog(view, "Customer gagal ditambahkan.");
+                                JOptionPane.showMessageDialog(view, "Nama customer sudah ada. Masukkan nama lain");
                             }
+                        } catch (SQLException ex) {
+                            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        else {
-                            JOptionPane.showMessageDialog(view, "Nama customer sudah ada. Masukkan nama lain");
-                        }
-                    } catch (SQLException ex) {
-                        JOptionPane.showMessageDialog(view, "Error : " + ex.getMessage());
                     }
                 }
+                addCustomer.reset();
             }
             case "2": {
                 view.getCardLayout().show(mainPanel, currentView);
+            try {
+                addTransaction.setCustomerItem(model.loadCustomer());
+            } catch (SQLException ex) {
+                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             }
             case "3": {
                 view.getCardLayout().show(mainPanel, currentView);
