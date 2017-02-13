@@ -14,6 +14,7 @@ import java.awt.event.MouseAdapter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -27,6 +28,7 @@ public class MainController extends MouseAdapter implements ActionListener {
     
     private String currentView;
     private JPanel mainPanel;
+    private JComboBox cbCustomer;
     
     /* defenisi view */
     private Login login;
@@ -37,7 +39,7 @@ public class MainController extends MouseAdapter implements ActionListener {
     private ViewTransaction viewTransaction;
     
     /* Constructor */
-    public MainController(Application model) {
+    public MainController(Application model) throws SQLException {
         this.model = model;
         this.view = new PanelContainer();
         
@@ -49,11 +51,12 @@ public class MainController extends MouseAdapter implements ActionListener {
         viewCustomer = new ViewCustomer();
         viewTransaction = new ViewTransaction();
         
+        cbCustomer = addTransaction.getCbCustomer();
         
         view.addListener(this);
         login.addListener(this);
         addCustomer.addListener(this);
-//        addTransaction
+        addTransaction.addListener(this);
 //        viewCustomer
 //        viewTransaction
         
@@ -101,6 +104,7 @@ public class MainController extends MouseAdapter implements ActionListener {
             currentView = "1";
         }
         else if (source.equals(view.getBtnAddTransaction())) {
+            cbCustomer.removeAllItems();
             currentView = "2";
         }
         else if (source.equals(view.getBtnViewCustomer())) {
@@ -157,12 +161,21 @@ public class MainController extends MouseAdapter implements ActionListener {
                 addCustomer.reset();
             }
             case "2": {
-                view.getCardLayout().show(mainPanel, currentView);
-            try {
-                addTransaction.setCustomerItem(model.loadCustomer());
-            } catch (SQLException ex) {
-                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                try {
+                    addTransaction.setCustomerItem(model.loadCustomer());
+                    view.getCardLayout().show(mainPanel, currentView);
+                    if (source.equals(addTransaction.getBtnSubmit())) {
+                        Object selected = cbCustomer.getSelectedItem();
+                        /* insert transaksi */
+                        System.out.println(selected);
+                        
+                        /* fungsi dibawah ini bisa dimasukkan fungsi reset view */
+                        addTransaction.reset();
+                        addTransaction.setCustomerItem(model.loadCustomer());
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             case "3": {
                 view.getCardLayout().show(mainPanel, currentView);
@@ -172,5 +185,4 @@ public class MainController extends MouseAdapter implements ActionListener {
             }
         }
     }
-    
 }

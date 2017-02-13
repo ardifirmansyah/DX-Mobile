@@ -48,6 +48,11 @@ public class Database {
         c.setIdPelanggan(generatedId);
     }
     
+    public void addTransaction(Transaction t) throws SQLException {
+        String query = "insert into transaksi "
+                + "";
+    }
+    
     public Customer getCustomerByName(String name) throws SQLException {
         Customer c = null;
         String query = "select * from pelanggan where namaPelanggan='"

@@ -6,9 +6,10 @@
 package View;
 
 import Model.Customer;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.ComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -43,8 +44,8 @@ public class AddTransaction extends javax.swing.JPanel {
         return Integer.parseInt(hargaJualInput.getText());
     }
     
-    public Customer getSelectedCustomer() {
-        return (Customer) cbCustomer.getSelectedItem();
+    public Object getSelectedCustomer() {
+        return cbCustomer.getSelectedItem();
     }
     
     public JComboBox getCbCustomer() {
@@ -53,12 +54,30 @@ public class AddTransaction extends javax.swing.JPanel {
     
     public void setCustomerItem(ArrayList<Customer> listCustomer) {
         for (Customer c : listCustomer) {
-            cbCustomer.addItem(c);
+            cbCustomer.addItem(c.getNamaPelanggan());
         }
     }
     
     public Object getBtnSubmit() {
         return btnSubmit;
+    }
+    
+    public void viewErrorMsg(String error) {
+        JOptionPane.showMessageDialog(this, error);
+    }
+    
+    public void addListener(ActionListener e) {
+        btnSubmit.addActionListener(e);
+    }
+    
+    public void reset() {
+        kodeInput.setText("");
+        deskripsiInput.setText("");
+        nomorHpInput.setText("");
+        hargaBeliInput.setText("");
+        hargaJualInput.setText("");
+        terbayarInput.setText("");
+        cbCustomer.removeAllItems();
     }
 
     /**
@@ -161,8 +180,6 @@ public class AddTransaction extends javax.swing.JPanel {
         jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 1, 0, 0));
 
         jLabel6.setText("Pelanggan :");
-
-        cbCustomer.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel7.setText("Terbayar ");
 

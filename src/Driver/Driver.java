@@ -7,15 +7,15 @@ package Driver;
 
 import Controller.MainController;
 import Model.Application;
+import java.sql.SQLException;
 
 /**
  *
  * @author ardifirmansyah
  */
 public class Driver {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         Application app = new Application();
-        
         new MainController(app);
     }
 }
